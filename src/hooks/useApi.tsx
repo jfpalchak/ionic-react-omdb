@@ -1,29 +1,9 @@
-export enum SearchType {
-  all = '',
-  movie = 'movie',
-  series = 'series',
-  episode = 'episode',
-}
-
-export interface DetailsResult {
-  Genre: string;
-  Title: string;
-  Year: string;
-  Poster: string;
-  Plot: string;
-  imdbRating: string;
-  Director: string;
-  Actors: string;
-  Website: string;
-}
-
-
 const useApi = () => {
 
-  const URL = 'https://www.omdbapi.com/';
+  const URL = 'http://www.omdbapi.com/';
   const API_KEY = import.meta.env.VITE_API_KEY;
 
-  const searchData = async (title: string, type: SearchType): Promise<any> => {
+  const searchData = async (title: string, type: SearchType): Promise<SearchResponse> => {
     const result = await fetch(
       `${URL}?s=${encodeURI(title)}&type=${type}&apikey=${API_KEY}`,
     );
@@ -44,3 +24,47 @@ const useApi = () => {
 }
 
 export default useApi;
+
+export enum SearchType {
+  all = '',
+  movie = 'movie',
+  series = 'series',
+  episode = 'episode',
+  game = 'game'
+}
+
+type Rating = {
+  Source: string;
+  Value: string;
+}
+export interface DetailsResult {
+  Awards: string;
+  Genre: string;
+  Title: string;
+  Year: string;
+  Poster: string;
+  Plot: string;
+  imdbRating: string;
+  Director: string;
+  Actors: string;
+  Website: string;
+  Response: string;
+  Error?: string;
+  Ratings: Rating[];
+  Rated: string;
+}
+
+export interface SearchResult {
+  Title: string;
+  Year: string;
+  Poster: string;
+  Type: string;
+  imdbID: string;
+}
+
+export interface SearchResponse {
+  Response: string;
+  totalResults: number;
+  Search: SearchResult[];
+  Error?: string;
+}
