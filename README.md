@@ -1,0 +1,1 @@
+A simple PWA built with the [Ionic Framework](https://ionicframework.com/) in React, utilizing the [OMDb API](https://www.omdbapi.com/). This project is intended for learning the Ionic Framework and its components.
